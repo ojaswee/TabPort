@@ -11,44 +11,34 @@ import javax.swing.table.DefaultTableModel;
 
 public class DatabaseConnections {
 	
-	   public static String user;
-	   public static String passwd;
-	   public static String db;
+    private static Connection databaseConnection = null;
 	   
-	   public static String url;
-	   
-	   public static Connection con;
-
-	public DatabaseConnections() throws SQLException {
-		super();
+	public static void connect () throws Exception{
 		
-		   user="root";
-		   passwd="";
-		   db="rideshare";
-		   url="jdbc:mysql://localhost/"+db;
-		   con = DriverManager.getConnection(url,user,passwd);
-	}
-	   
-	public static void connectLogin( DefaultTableModel model ) throws Exception{
-		
-		
-		try {
-			   System.out.println("HELLO--");
-		       PreparedStatement pstm = con.prepareStatement("SELECT * FROM trip ");
-		       ResultSet Rs = pstm.executeQuery();
-		       
-		       System.out.println("Rs");
-		       while(Rs.next()){
-		           model.addRow(new Object[]{Rs.getInt(1), Rs.getString(2),Rs.getString(3),Rs.getString(4),Rs.getString(5),Rs.getString(6)});
-		           System.out.println("hello from rs");
-		           System.out.println(Rs.getInt(1)+ Rs.getString(2)+Rs.getString(3)+Rs.getString(4));
-		       }
-		   } catch (Exception e) {
-		       System.out.println(e.getMessage());
+		   String driver = "com.mysql.cj.jdbc.Driver";
+	       String dbuser ="root";
+		   String dbpasswd="root";
+		   String db="tabport";
+		   String url="jdbc:mysql://localhost/"+db;
+		   
+		   try {
+		   Class.forName(driver);
+		   databaseConnection = DriverManager.getConnection(url, dbuser, dbpasswd);
+		   }catch (Exception e) {
+			   throw new Exception("mysql connection error "+ e.getMessage());
 		   }
-		
-		
+		   
 	}
-	   
+		 
+	public static void connectLogin(String userName, String passwd) throws Exception{
+		        
+		       connect();
+		       //PreparedStatement pstm = databaseConnection.prepareStatement("SELECT * FROM user_login");
+		       String query = "SELECT * FROM user_login where user_name ='"+userName+"'AND passwords ='"+passwd +"';";
+		      
+		       PreparedStatement pstm = databaseConnection.prepareStatement(query);
+		       ResultSet Rs = pstm.executeQuery();
+	
+	            }
 
 }
