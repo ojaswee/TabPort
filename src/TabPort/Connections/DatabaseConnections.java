@@ -8,6 +8,9 @@ import java.sql.SQLException;
 
 import javax.swing.table.DefaultTableModel;
 
+import TabPort.GUI.MenuFrame;
+import TabPort.Main.Home;
+
 
 public class DatabaseConnections {
 	
@@ -30,18 +33,13 @@ public class DatabaseConnections {
 		   
 	}
 		 
-	public static void connectLogin(String userName, String passwd) throws Exception{
+	public static ResultSet connectLogin(String userName, String passwd) throws Exception{
 		connect();
 		try {
 			String query = "SELECT * FROM user_login where user_name ='"+userName+"'AND passwords ='"+passwd +"';";
 		    PreparedStatement pstm = databaseConnection.prepareStatement(query);
 		    ResultSet Rs = pstm.executeQuery();
-		    if (Rs.next()) {
-		    	System.out.println("LogIn successful");
-		    }
-		    else {
-		    	System.out.println("Invalid username or password");
-		    }
+		    return (Rs);
 		    }
 		catch (Exception e) {
 		   throw new Exception("mysql connection error "+ e.getMessage());

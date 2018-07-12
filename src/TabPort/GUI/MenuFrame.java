@@ -26,14 +26,8 @@ public class MenuFrame extends JFrame {
 	}
 	
 public static void populateData() throws Exception{
-		
-	   
-	   model.addColumn("username");
-	   model.addColumn("origin");
-	   model.addColumn("destination");
-	   model.addColumn("tripdate");
-	   model.addColumn("triptime");
-	   model.addColumn("number");
+	   model.addColumn("userName");
+	   model.addColumn("passwd");
 	   
    // DatabaseConnections.connectLogin(model);
     

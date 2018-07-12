@@ -8,8 +8,7 @@ public class Home {
 	public static void main(String[] args) throws Exception {
 		
 		LoginFrame loginFrame = new LoginFrame();
-			
-//		MenuFrame homeFrame = new MenuFrame();
+		MenuFrame homeFrame = new MenuFrame();
 //		homeFrame.setTitle("TabPort - Reporting Application");
 //		homeFrame.setSize(500, 300);
 //		homeFrame.setLocationRelativeTo(null);

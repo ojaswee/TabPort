@@ -6,6 +6,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.InputStream;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -98,20 +99,21 @@ public class LoginFrame extends JFrame {
 		});
 	}
 	
-	private void login(){
+	private void login() throws Exception{
 		String userName= usernameTextField.getText();
 		String passwd = new String(passwordTextField.getPassword());
-		try {
-		DatabaseConnections.connectLogin(userName, passwd); 
+//		DatabaseConnections.connectLogin(userName, passwd);
+	    ResultSet Rs= DatabaseConnections.connectLogin(userName, passwd);
+		if (Rs.next()) {
+			System.out.println("LogIn successful");
+			MenuFrame home = new MenuFrame();
+			home.setVisible(true);
+			dispose();
 		}
-		catch (Exception e) {
-			if(e.getMessage().equals("Auth fail")){
-				JOptionPane.showMessageDialog(this, "Incorrect username or password. Please try again.");
-			}else{
-				JOptionPane.showMessageDialog(this, "Login failed: " + e.getMessage());
-			}
-			return;
-			}
+		else {
+			System.out.println("Invalid username or password");
+		}
+
 	}
 
 }
