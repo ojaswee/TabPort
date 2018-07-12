@@ -35,7 +35,7 @@ public static void populateData() throws Exception{
 	   model.addColumn("triptime");
 	   model.addColumn("number");
 	   
-    DatabaseConnections.connectLogin(model);
+   // DatabaseConnections.connectLogin(model);
     
     
     

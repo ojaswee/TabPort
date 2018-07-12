@@ -98,14 +98,20 @@ public class LoginFrame extends JFrame {
 		});
 	}
 	
-	private void login() throws Exception{
+	private void login(){
 		String userName= usernameTextField.getText();
 		String passwd = new String(passwordTextField.getPassword());
+		try {
 		DatabaseConnections.connectLogin(userName, passwd); 
-		
-	
-	    System.out.println("LogIn successful");
-		
-}
+		}
+		catch (Exception e) {
+			if(e.getMessage().equals("Auth fail")){
+				JOptionPane.showMessageDialog(this, "Incorrect username or password. Please try again.");
+			}else{
+				JOptionPane.showMessageDialog(this, "Login failed: " + e.getMessage());
+			}
+			return;
+			}
+	}
 
 }

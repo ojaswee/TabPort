@@ -31,14 +31,21 @@ public class DatabaseConnections {
 	}
 		 
 	public static void connectLogin(String userName, String passwd) throws Exception{
-		        
-		       connect();
-		       //PreparedStatement pstm = databaseConnection.prepareStatement("SELECT * FROM user_login");
-		       String query = "SELECT * FROM user_login where user_name ='"+userName+"'AND passwords ='"+passwd +"';";
-		      
-		       PreparedStatement pstm = databaseConnection.prepareStatement(query);
-		       ResultSet Rs = pstm.executeQuery();
-	
-	            }
+		connect();
+		try {
+			String query = "SELECT * FROM user_login where user_name ='"+userName+"'AND passwords ='"+passwd +"';";
+		    PreparedStatement pstm = databaseConnection.prepareStatement(query);
+		    ResultSet Rs = pstm.executeQuery();
+		    if (Rs.next()) {
+		    	System.out.println("LogIn successful");
+		    }
+		    else {
+		    	System.out.println("Invalid username or password");
+		    }
+		    }
+		catch (Exception e) {
+		   throw new Exception("mysql connection error "+ e.getMessage());
+		   }
+    }
 
 }
