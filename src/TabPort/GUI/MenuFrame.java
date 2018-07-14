@@ -14,6 +14,16 @@ public class MenuFrame extends JFrame {
 	Container cnt = this.getContentPane();
 	static JTable jtbl = new JTable(model);
 	
+	private JPanel panel;
+    private JButton showReport;
+    private JButton downloadReport;
+    
+	private void createComponents(){
+		panel = new JPanel();
+		showReport = new JButton("View Report");
+		downloadReport = new JButton("Download");
+	}
+	
 	public MenuFrame()throws Exception{
 		
 		cnt.setLayout(new FlowLayout(FlowLayout.LEFT));
