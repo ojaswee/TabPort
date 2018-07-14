@@ -22,7 +22,7 @@ public class DatabaseConnections {
 	       String dbuser ="root";
 		   String dbpasswd="root";
 		   String db="tabport";
-		   String url="jdbc:mysql://localhost/"+db;
+		   String url="jdbc:mysql://localhost/"+db + "?useSSL=false";
 		   
 		   try {
 		   Class.forName(driver);
