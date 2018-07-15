@@ -17,8 +17,8 @@ public class MenuFrame extends JFrame {
 	static JTable jtbl = new JTable(model);
 	
 	private JPanel panel;
-    private JButton showReport;
-    private JButton downloadReport;
+    private JButton showReportButton;
+    private JButton myReportsButton;
     
 	public MenuFrame() {
 		super("TabPort Menu");		
@@ -31,9 +31,8 @@ public class MenuFrame extends JFrame {
 	
 	private void createComponents(){
 		panel = new JPanel();
-		showReport = new JButton("View Report");
-		downloadReport = new JButton("Download");
-//		LayoutMenu();
+		showReportButton = new JButton("Request Report");
+		myReportsButton = new JButton("My Reports");
 	}
 	
 	public void LayoutMenu() {
@@ -41,15 +40,15 @@ public class MenuFrame extends JFrame {
 		panel.setLayout(null);
 		
 		//loginButton.setFont(GUICommonTools.TAHOMA_BOLD_14);
-		showReport.setBounds(120, 114, 110, 23);
-		downloadReport.setBounds(295, 114, 110, 23);
+		showReportButton.setBounds(100, 114, 130, 23);
+		myReportsButton.setBounds(295, 114, 110, 23);
 		
-		panel.add(showReport);
-		panel.add(downloadReport);
+		panel.add(showReportButton);
+		panel.add(myReportsButton);
 		add(panel);
 	}
 	private void activateComponents(){
-		showReport.addActionListener(new ActionListener(){
+		showReportButton.addActionListener(new ActionListener(){
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				try {
@@ -61,8 +60,24 @@ public class MenuFrame extends JFrame {
 			}			
 		});
 		
+		myReportsButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				try {
+					dwnldReport();
+				}
+				catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		});
 	}
 	public void viewReport() {
-		System.out.println("Viewing Report");
+		System.out.println("Requesting Report");
+	}
+	
+	public void dwnldReport() {
+		System.out.println("My Report");
+		
 	}
 }
