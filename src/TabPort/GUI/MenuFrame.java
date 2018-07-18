@@ -17,8 +17,9 @@ public class MenuFrame extends JFrame {
 	static JTable jtbl = new JTable(model);
 	
 	private JPanel panel;
-    private JButton showReportButton;
-    private JButton myReportsButton;
+    private JButton requestReportButton;
+    private JButton monitorReportsButton;
+    private JButton reportsHistoryButton;
     
 	public MenuFrame() {
 		super("TabPort Menu");		
@@ -31,28 +32,43 @@ public class MenuFrame extends JFrame {
 	
 	private void createComponents(){
 		panel = new JPanel();
-		showReportButton = new JButton("Request Report");
-		myReportsButton = new JButton("My Reports");
+		requestReportButton = new JButton("Request Report");
+		monitorReportsButton = new JButton("Monitor");
+		reportsHistoryButton = new JButton("History");
 	}
 	
 	public void LayoutMenu() {
-		setSize(540, 345);
+		setSize(340, 345);
 		panel.setLayout(null);
 		
 		//loginButton.setFont(GUICommonTools.TAHOMA_BOLD_14);
-		showReportButton.setBounds(100, 114, 130, 23);
-		myReportsButton.setBounds(295, 114, 110, 23);
+		requestReportButton.setBounds(100, 80, 130, 23);
+		monitorReportsButton.setBounds(100, 150, 130, 23);
+		reportsHistoryButton.setBounds(100,220, 130, 23);
 		
-		panel.add(showReportButton);
-		panel.add(myReportsButton);
+		panel.add(requestReportButton);
+		panel.add(monitorReportsButton);
+		panel.add(reportsHistoryButton);
+
 		add(panel);
 	}
 	private void activateComponents(){
-		showReportButton.addActionListener(new ActionListener(){
+		requestReportButton.addActionListener(new ActionListener(){
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				try {
-					viewReport();
+					requestReport();
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}			
+		});
+		monitorReportsButton.addActionListener(new ActionListener(){
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				try {
+					monitorReport();
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -60,10 +76,10 @@ public class MenuFrame extends JFrame {
 			}			
 		});
 		
-		myReportsButton.addActionListener(new ActionListener() {
+		reportsHistoryButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				try {
-					dwnldReport();
+					myReportHistory();
 				}
 				catch (Exception e) {
 					// TODO Auto-generated catch block
@@ -72,11 +88,20 @@ public class MenuFrame extends JFrame {
 			}
 		});
 	}
-	public void viewReport() {
+	public void requestReport() {
 		System.out.println("Requesting Report");
+		RequestReport RR = new RequestReport();
+		RR.setVisible(true);
+		dispose();
+	}
+	public void monitorReport() {
+		System.out.println("Requesting Report");
+		RequestReport RR = new RequestReport();
+		RR.setVisible(true);
+		dispose();
 	}
 	
-	public void dwnldReport() {
+	public void myReportHistory() {
 		System.out.println("My Report");
 		
 	}

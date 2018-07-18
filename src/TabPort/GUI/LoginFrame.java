@@ -19,7 +19,6 @@ import javax.swing.JTextField;
 import TabPort.Connections.DatabaseConnections;
 
 
-
 public class LoginFrame extends JFrame {
 	
 	private JPanel panel;
@@ -29,10 +28,9 @@ public class LoginFrame extends JFrame {
     
     
     public static void main(String[] args) {
-		
-				LoginFrame window = new LoginFrame();
-				window.setVisible(true);
-				window.setResizable(false);
+		LoginFrame window = new LoginFrame();
+		window.setVisible(true);
+		window.setResizable(false);
 	}
 
 	/**
