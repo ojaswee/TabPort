@@ -1,26 +1,29 @@
 package TabPort.Objects;
 
+import java.sql.Date;
+
 public class Report {
 
-	public final Integer queueID;
-	public final String departmentID;
-	public final String status;
+	public final Integer reportID;
+	public final String reportName;
+	public final Date startDate, endDate;
 	public final String runTime;
 	
 	
-	public Report (Integer queueID, String departmentID ,String status, String runTime) {
-        this.queueID = queueID;
-        this.departmentID = departmentID;
-        this.status = status;
+	public Report (Integer reportID, String reportName ,Date startDate, Date endDate,String runTime) {
+        this.reportID = reportID;
+        this.reportName = reportName;
+        this.startDate = startDate;
+        this.endDate = endDate;
         this.runTime = runTime;
 	}
 
-	public Integer getQueueID() {
-		return queueID;
+	public Integer getReportID() {
+		return reportID;
 	}
 
-	public String getdepartmentID() {
-		return departmentID;
+	public String getReportName() {
+		return reportName;
 }
 
 }

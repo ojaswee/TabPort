@@ -92,17 +92,18 @@ public class MenuFrame extends JFrame {
 		System.out.println("Requesting Report");
 		RequestReport RR = new RequestReport();
 		RR.setVisible(true);
-		dispose();
+		//dispose();
 	}
 	public void monitorReport() {
-		System.out.println("Requesting Report");
-		RequestReport RR = new RequestReport();
-		RR.setVisible(true);
-		dispose();
+		System.out.println("Monitor Report");
+		MonitorFrame monitor = new MonitorFrame();
+		monitor.setVisible(true);
+		//dispose();
 	}
 	
 	public void myReportHistory() {
-		System.out.println("My Report");
-		
+		System.out.println("History Frame");
+		HistoryFrame history = new HistoryFrame();
+		history.setVisible(true);	
 	}
 }
