@@ -17,21 +17,18 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 import TabPort.Connections.DatabaseConnections;
+import TabPort.Objects.User;
 
 
 public class LoginFrame extends JFrame {
+	
+	private static final long serialVersionUID = 1L;
 	
 	private JPanel panel;
 	private JTextField usernameTextField;
 	private JPasswordField passwordTextField;
     private JButton loginButton;
     
-    
-    public static void main(String[] args) {
-		LoginFrame window = new LoginFrame();
-		window.setVisible(true);
-		window.setResizable(false);
-	}
 
 	/**
 	 * Create the application.
@@ -56,11 +53,11 @@ public class LoginFrame extends JFrame {
 		panel.setLayout(null);
 		
 		JLabel lblUsername = new JLabel("UserName");
-		//lblUsername.setFont(GUICommonTools.TAHOMA_BOLD_14);
+		lblUsername.setFont(GUICommonTools.TAHOMA_BOLD_14);
 		lblUsername.setBounds(72, 71, 101, 33);
 		
 		JLabel lblPassword = new JLabel("Password");
-		//lblPassword.setFont(GUICommonTools.TAHOMA_BOLD_14);
+		lblPassword.setFont(GUICommonTools.TAHOMA_BOLD_14);
 		lblPassword.setBounds(72, 145, 74, 14);
 		
 		usernameTextField.setBounds(160, 74, 142, 30);
@@ -68,7 +65,7 @@ public class LoginFrame extends JFrame {
 		
 		passwordTextField.setBounds(160, 139, 142, 30);
 		
-		//loginButton.setFont(GUICommonTools.TAHOMA_BOLD_14);
+		loginButton.setFont(GUICommonTools.TAHOMA_BOLD_14);
 		loginButton.setBounds(181, 214, 89, 23);
 		
 		panel.add(lblUsername);
@@ -79,8 +76,8 @@ public class LoginFrame extends JFrame {
 		add(panel);
 		getRootPane().setDefaultButton(loginButton);
 		
-		//Rectangle bounds = GUICommonTools.getBounds(this);
-		//setLocation(bounds.width/2-getSize().width/2, bounds.height/2-getSize().height/2);
+		Rectangle bounds = GUICommonTools.getBounds(this);
+		setLocation(bounds.width/2-getSize().width/2, bounds.height/2-getSize().height/2);
 	}
 	
 	private void activateComponents(){
@@ -100,16 +97,23 @@ public class LoginFrame extends JFrame {
 	private void login() throws Exception{
 		String userName= usernameTextField.getText();
 		String passwd = new String(passwordTextField.getPassword());
-//		DatabaseConnections.connectLogin(userName, passwd);
-	    ResultSet Rs= DatabaseConnections.connectLogin(userName, passwd);
-		if (Rs.next()) {
-			System.out.println("LogIn successful");
-			MenuFrame home = new MenuFrame();
-			home.setVisible(true);
+		
+		userName="t";
+	    passwd="t";
+		boolean success = DatabaseConnections.connectLogin(userName, passwd);
+		
+		if (success){
+			
+			DatabaseConnections.connect();
+			
+			User currentuser = DatabaseConnections.getUserInfo(userName);
+			
+			MenuFrame menuframe = new MenuFrame(LoginFrame.this, currentuser);
+			menuframe.setVisible(true);
 			dispose();
+		
 		}
 		else {
-			System.out.println("Invalid username or password");
 			JOptionPane.showMessageDialog(null,"Invalid username or password");
 		}
 

@@ -2,13 +2,19 @@ package TabPort.Objects;
 
 public class User {
 	
-	String userName;
-	String passWord;
+	public String userID; 
+	public String userName; 
+	public String department;
 	
-	public User(String userName, String passWord) {
+	public User() {
+		super();
+	}
+	
+	public User(String userID,String userName,  String department) {
 		super();
 		this.userName = userName;
-		this.passWord = passWord;
+		this.userID = userID;
+		this.department = department;
 	}
 	public String getUserName() {
 		return userName;
@@ -16,13 +22,18 @@ public class User {
 	public void setUserName(String userName) {
 		this.userName = userName;
 	}
-	public String getPassWord() {
-		return passWord;
+	public String getUserID() {
+		return userID;
 	}
-	public void setPassWord(String passWord) {
-		this.passWord = passWord;
+	public void setUserID(String userID) {
+		this.userID = userID;
 	}
-	
+	public String getDepartment() {
+		return department;
+	}
+	public void setDepartment(String department) {
+		this.department = department;
+	}
 	
 
 }
