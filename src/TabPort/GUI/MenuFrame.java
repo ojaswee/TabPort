@@ -123,9 +123,9 @@ public class MenuFrame extends JDialog {
 		//dispose();
 	}
 	
-	public void myReportHistory() {
+	public void myReportHistory() throws Exception{
 		System.out.println("History Frame");
-		HistoryFrame history = new HistoryFrame();
+		HistoryFrame history = new HistoryFrame(MenuFrame.this, this.currentuser);
 		history.setVisible(true);	
 	}
 	

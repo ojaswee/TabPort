@@ -111,7 +111,6 @@ public class LoginFrame extends JFrame {
 			MenuFrame menuframe = new MenuFrame(LoginFrame.this, currentuser);
 			menuframe.setVisible(true);
 			dispose();
-		
 		}
 		else {
 			JOptionPane.showMessageDialog(null,"Invalid username or password");

@@ -152,7 +152,7 @@ public class MonitorFrame extends JDialog  {
 			width = Math.min(maxWidth, width);
 			columnModel.getColumn(column).setPreferredWidth(width);
 		}
-}
+	}
 	
 	private void activateComponents(){
 		
