@@ -21,7 +21,7 @@ public class RequestReportTableModel  extends AbstractTableModel {
 	private void constructColumns(){
 		columns = new ArrayList<RequestReportTableModelColumn>();
 		
-		columns.add(new RequestReportTableModelColumn("The user ID",
+		columns.add(new RequestReportTableModelColumn("The Queue ID",
 				"queueID",
 				Integer.class,
 				(Request request) -> request.queueID));
@@ -118,6 +118,6 @@ public class RequestReportTableModel  extends AbstractTableModel {
 
 	public String getColumnDescription(int column){
 		return columns.get(column).description;
-}
+	}
 
 }

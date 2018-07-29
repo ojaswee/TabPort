@@ -34,8 +34,6 @@ public class MonitorFrame extends JDialog  {
 
 	private JButton btnRefresh;
 
-	
-
 	//Table
 	private JTable table;
 	
@@ -163,7 +161,7 @@ public class MonitorFrame extends JDialog  {
 		tableModel.resetModel();
 		
 	
-		ArrayList<Request> requests = DatabaseConnections.getAllRequests(currentuser.getUserID());
+		ArrayList<Request> requests = DatabaseConnections.getAllRequestsMonitor(currentuser.getUserID(), currentuser.getDepartment());
 		
 			
 		for(Request r : requests) {

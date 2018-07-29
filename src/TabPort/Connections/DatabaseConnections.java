@@ -117,7 +117,6 @@ public class DatabaseConnections {
 	}
     
 	
-	
 	private static Request getRequest(ResultSet row) throws SQLException{
 		Request request = new Request(
 				row.getInt("queueID"),
@@ -133,8 +132,9 @@ public class DatabaseConnections {
 		return request;
 	}
 
-	public static ArrayList<Request> getAllRequests(String userID) throws Exception{
-		String query = "select * from queue" ;
+	public static ArrayList<Request> getAllRequestsMonitor(String userID, String department) throws Exception{
+		String query = "Select * from queue where department = '" + department +"'AND status "
+				+ "NOT IN ('Complete', 'Error');" ;
 		PreparedStatement preparedStatement = databaseConnection.prepareStatement(query);
 		ResultSet rs = preparedStatement.executeQuery();
 		
@@ -148,5 +148,23 @@ public class DatabaseConnections {
 		preparedStatement.close();
 
 		return requests;
-}
+	}
+	public static ArrayList<Request> getAllRequestsHistory(String userID, String department) throws Exception{
+//		String query = "select * from queue; " ;
+		String query = "Select * from queue where department = '" + department +"'AND status "
+				+ "NOT IN ('Running', 'Queued');" ;
+		PreparedStatement preparedStatement = databaseConnection.prepareStatement(query);
+		ResultSet rs = preparedStatement.executeQuery();
+		
+		
+		ArrayList<Request> requests = new ArrayList<Request>();
+
+		while(rs.next()){
+			Request r = getRequest(rs);
+			requests.add(r);
+		}
+		preparedStatement.close();
+
+		return requests;
+	}
 }

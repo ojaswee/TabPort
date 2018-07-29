@@ -35,13 +35,11 @@ public class HistoryFrame extends JDialog{
 	
 	private HistoryTableModel tableModel;
 	
-	
     private JScrollPane tableScrollPane;
 	
 	
     private TableRowSorter<HistoryTableModel> sorter;
  
-	
 	private MenuFrame parent;
 	
 	public User currentuser;
@@ -144,7 +142,7 @@ public class HistoryFrame extends JDialog{
 		tableModel.resetModel();
 		
 	
-		ArrayList<Request> requests = DatabaseConnections.getAllRequests(currentuser.getUserID());
+		ArrayList<Request> requests = DatabaseConnections.getAllRequestsHistory(currentuser.getUserID(), currentuser.getDepartment());
 		
 			
 		for(Request r : requests) {
