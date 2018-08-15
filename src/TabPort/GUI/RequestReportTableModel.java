@@ -36,24 +36,24 @@ public class RequestReportTableModel  extends AbstractTableModel {
 				String.class,
 				(Request request) -> request.username));
 
-		columns.add(new RequestReportTableModelColumn("The sample used",
+		columns.add(new RequestReportTableModelColumn("Department",
 				"department",
 				String.class,
 				(Request request) -> request.department));
 
-		columns.add(new RequestReportTableModelColumn("The assay used", 
+		columns.add(new RequestReportTableModelColumn("Report", 
 				"report", 
 				String.class,
 				(Request request) -> request.report));
 
 
-		columns.add(new RequestReportTableModelColumn("The instrument used", 
+		columns.add(new RequestReportTableModelColumn("Process", 
 				"process", 
 				String.class,
 				(Request request) -> request.process));
 
 
-		columns.add(new RequestReportTableModelColumn("The environment used", 
+		columns.add(new RequestReportTableModelColumn("Document", 
 				"document", 
 				String.class,
 				(Request request) -> request.document));
@@ -63,7 +63,7 @@ public class RequestReportTableModel  extends AbstractTableModel {
 				String.class,
 				(Request request) -> request.status));
 
-		columns.add(new RequestReportTableModelColumn("The runtime of pipeline", 
+		columns.add(new RequestReportTableModelColumn("Date requested", 
 				"date", 
 				String.class,
 				(Request request) -> request.date));

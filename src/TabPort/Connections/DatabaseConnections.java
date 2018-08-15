@@ -71,8 +71,6 @@ public class DatabaseConnections {
 	    	pstm.close();
 	    }
 	    return user;
-		
-		
 	}
 	
 	public static ArrayList<String> getReportByDepartment(String userName) throws Exception{
@@ -81,6 +79,23 @@ public class DatabaseConnections {
 		//TODO check the name of departmentID
 
 		String query = "select reportname from report where departmentID in (select departmentID from users where username='" + userName + "');";
+	    PreparedStatement pstm = databaseConnection.prepareStatement(query);
+	    ResultSet rs = pstm.executeQuery();
+
+	    while(rs.next()){
+	    	System.out.println(rs.getString(1));
+	    	reports.add(rs.getString(1));
+	    }
+		
+		return reports;
+	}
+	
+	public static ArrayList<String> getProcess(String userName) throws Exception{
+		
+		ArrayList<String> reports = new ArrayList<String>();
+		//TODO check the name of departmentID
+
+		String query = "select processname from process;";
 	    PreparedStatement pstm = databaseConnection.prepareStatement(query);
 	    ResultSet rs = pstm.executeQuery();
 
@@ -149,6 +164,7 @@ public class DatabaseConnections {
 
 		return requests;
 	}
+	
 	public static ArrayList<Request> getAllRequestsHistory(String userID, String department) throws Exception{
 //		String query = "select * from queue; " ;
 		String query = "Select * from queue where department = '" + department +"'AND status "

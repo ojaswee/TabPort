@@ -38,7 +38,7 @@ public class RequestReport extends JDialog{
 	private JTextField departmentTextField;//dept get from user log in
 	
 	private JComboBox reportComboBox; // auto fill from database by looking at users dept
-	private JComboBox processIDComboBox;
+	private JComboBox processComboBox;
 	
 	private JTextField fileIDTextField; // input given by IT eg EI072018
     
@@ -68,19 +68,17 @@ public class RequestReport extends JDialog{
         
         setUserDepartment();
         setReportsbyDepartment();
-        
-        // fillprocess        
-		
+        setProcess();
+             
 	}
 	
 	private void createComponents(){
-		
-		
+				
 		userIDTextField = new JTextField();
 		departmentTextField= new JTextField();
 		
 		reportComboBox = new JComboBox();
-		processIDComboBox = new JComboBox();
+		processComboBox = new JComboBox();
 		
 		fileIDTextField = new JTextField();
 		
@@ -97,7 +95,7 @@ public class RequestReport extends JDialog{
         mainPanel.add(new RowPanel("Name ", userIDTextField));
         mainPanel.add(new RowPanel("Department", departmentTextField));
         mainPanel.add(new RowPanel("Report", reportComboBox));
-        mainPanel.add(new RowPanel("Process", processIDComboBox));
+        mainPanel.add(new RowPanel("Process", processComboBox));
         mainPanel.add(new RowPanel("FileID", fileIDTextField));
         
         
@@ -146,13 +144,19 @@ public class RequestReport extends JDialog{
 		
 		ArrayList<String> reports = DatabaseConnections.getReportByDepartment(currentuser.getUserName());
 		
-		
 		for(int i =0; i < reports.size(); i++){
 			reportComboBox.addItem(reports.get(i));
-			processIDComboBox.addItem(reports.get(i));
+//			processComboBox.addItem(reports.get(i));
        }
+	}
+	
+	private void setProcess() throws Exception {
 		
+		ArrayList<String> reports = DatabaseConnections.getProcess(currentuser.getUserName());
 		
+		for(int i =0; i < reports.size(); i++){
+			processComboBox.addItem(reports.get(i));
+       }
 	}
 	
 	private void reportSubmission() throws Exception{
@@ -163,10 +167,9 @@ public class RequestReport extends JDialog{
 		String department = departmentTextField.getText();
 		
 		String report = reportComboBox.getSelectedItem().toString();
-		String process = processIDComboBox.getSelectedItem().toString();
+		String process = processComboBox.getSelectedItem().toString();
 		
 		String document = fileIDTextField.getText();
-		
 		
 		String status = "queued";
 		
@@ -184,8 +187,6 @@ public class RequestReport extends JDialog{
 			JOptionPane.showMessageDialog(null,"Error");
 			
 		}
-		
-
 	}
 	
 	private class RowPanel extends JPanel{
