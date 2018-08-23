@@ -44,16 +44,22 @@ chmod 777   outfiles/"$currentdate".txt
 
 echo "Running pipelines cron job at - $currentdate " > outfiles/"$currentdate".txt
 
-rID=''
-statement="select requestID from queue where status='queued' limit 1;"
+jobs=()
+statement="select requestID from queue where status='queued';"
 echo "---Queued jobs ---"
 while read -r requestID;
 do 
    echo "requestID is $requestID"
-   rID="$requestID"
+   jobs+=($requestID)
 done < <( mysql --user="$user" --password="$password" --database="$database" --execute="$statement" -N)
 
+sudo parallel --jobs /home/reporting/run_files/jobfile \
+			  --load /home/reporting/run_files/loadfile \
+	          --noswap \
+	          --eta \
+	          --memfree /home/reporting/run_files/memfile \
+              --args jobs  "/home/reporting/runPipelineThread.sh -d $database -u $user -p $password -r "
 
-bash /home/reporting/runPipelineThread.sh -d $database -u $user -p $password -r $rID
+
 
 
