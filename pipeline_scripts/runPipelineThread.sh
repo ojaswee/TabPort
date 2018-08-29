@@ -44,6 +44,22 @@ echo "running from runPipelinThread"
 echo " $user, $database , $password ,$requestID"
 
 ### TODO implement tabcmd command to send report request to tableau virtual machine
+# log into the tableau server
+tabcmd login -s http://IP.address.of.server -u username -p password
 
+#create new project in the default site 
+tabcmd createproject -n "Finance"
+
+#publish naked data exact, we want to expenses per process in cost_per_process.tde
+tabcmd publish "C:\Users\ojaswee\Critical Tableau Workbooks\ cost_per_process.tde –project" "Most expensive process" -n "Cost per process" --db-username "username" --db-password "password"
+ 
+# update data extract 
+tabcmd refreshextracts -–project “Finance” –data source “Cost per process”
+
+# export tableau viz as a pdf
+tabcmd export –-project “Finance” “Most expensive process/Sheet1” –-pdf
+
+# remove the project 
+tabcmd deleteproject "Finance"
 
 
